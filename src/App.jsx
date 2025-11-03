@@ -5,7 +5,7 @@ import NavBar from "./components/NavBar/NavBar"
 import ProtectedRoute from "./components/Auth/ProtectedRoute"
 import Login from "./components/Auth/Login"
 import SignUp from "./components/Auth/SignUp"
-// import VoiceTraining from "./components/VoiceTraining/VoiceTraining"
+import VoiceTraining from "./components/VoiceTraining/VoiceTraining"
 
 export default function App() {
   // Read user from saved JWT
@@ -18,8 +18,14 @@ export default function App() {
       <Routes>
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/signup" element={<SignUp />} />
-
-        
+         <Route
+          path="/training"
+          element={
+            <ProtectedRoute>
+              <VoiceTraining />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/"
           element={<h1>Welcome to SpeakEase 🎤✨</h1>}
