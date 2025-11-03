@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import axios from "axios"
-import { saveTokens, getUserFromToken } from "../lib/auth"
+import { saveTokens, getUserFromToken } from "../../lib/auth";
 import { useNavigate } from "react-router"
 
 export default function Login({ setUser }) {
