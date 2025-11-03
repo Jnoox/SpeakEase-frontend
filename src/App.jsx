@@ -6,6 +6,8 @@ import ProtectedRoute from "./components/Auth/ProtectedRoute"
 import Login from "./components/Auth/Login"
 import SignUp from "./components/Auth/SignUp"
 import VoiceTraining from "./components/VoiceTraining/VoiceTraining"
+import TipTraining from "./components/TipTraining/TipTraining"
+import Profile from "./components/Profile/Profile"
 
 export default function App() {
   // Read user from saved JWT
@@ -23,6 +25,15 @@ export default function App() {
           element={
             <ProtectedRoute>
               <VoiceTraining />
+              <TipTraining/>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
             </ProtectedRoute>
           }
         />

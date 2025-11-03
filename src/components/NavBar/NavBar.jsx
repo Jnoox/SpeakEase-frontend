@@ -8,6 +8,7 @@ export default function NavBar({ user, setUser }) {
       <Link to="/">Home</Link>
 
       {user && <Link to="/training">Training</Link>}
+      {user && <Link to="/profile">Profile</Link>}
 
       {user ? (
         <LogOutButton setUser={setUser} />
