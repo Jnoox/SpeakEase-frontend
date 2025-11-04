@@ -9,7 +9,9 @@ export default function VoiceTraining() {
   const [audioRecord, setAudioRecord] = useState(null)
   const [result, setResult] = useState(null)
   const [timer, setTimer] = useState(null)
+  const [wavAudio, setWavAudio] = useState(null);
   const [recordingStatus, setRecordingStatus] = useState(null)
+  const [audioDuration, setAudioDuration] = useState(0);
 
   //source helper: https://www.cybrosys.com/blog/how-to-implement-audio-recording-in-a-react-application
   async function getRandomWord() {
@@ -54,8 +56,10 @@ export default function VoiceTraining() {
         setRecordedUrl(url);
         // save the audio 
         setAudioRecord(recordedBlob)
+
         convertWebmToWav(recordedBlob).then((wavBlob) => {
           console.log(wavBlob);
+          setWavAudio(wavBlob);
         });
 
         chunks.current = [];
@@ -89,8 +93,18 @@ export default function VoiceTraining() {
         audioContext.decodeAudioData(
           arrayBuffer,
           (audioBuffer) => {
-            const wavData = toWav(audioBuffer);
 
+            const duration = audioBuffer.duration;
+            setAudioDuration(duration);
+
+            // // source helper: https://stackoverflow.com/questions/65520105/how-to-get-audio-file-duration-in-react-typescript
+            // // get audio duration
+            // const audio = document.createElement("audio");
+            // audio.src = url;
+            // audio.addEventListener("loadedmetadata", () => {
+            //   setAudioDuration(audio.duration);
+            // });
+            const wavData = toWav(audioBuffer);
             const wavBlob = new Blob([new DataView(wavData)], {
               type: "audio/wav",
             });
@@ -105,12 +119,47 @@ export default function VoiceTraining() {
     });
   }
 
+  async function sendAudio(e) {
+    e.preventDefault()
+    try {
+
+      // source helper:https://stackoverflow.com/questions/12989442/uploading-multiple-files-using-formdata
+      const formData = new FormData();
+      formData.append('audio_file', wavAudio, 'recording.wav');
+      formData.append('duration', Math.ceil(audioDuration).toString());
+      formData.append('word', word);
+
+      const response = await authRequest({
+        method: 'post',
+        url: 'http://127.0.0.1:8000/api/training/voice/',
+        data: formData
+      })
+
+      setResult(response.data)
+      console.log(result)
+
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   return (
     <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
       <h1>Describe a Word</h1>
       <div>
         <button onClick={startRecording}>Start Recording</button>
         <button onClick={stopRecording}>Stop Recording</button>
+        <button onClick={sendAudio}>Send Audio</button>
+        <h3>Result:</h3>
+        {result && (
+          <div>
+            <h3>Result:</h3>
+            <p>Score: {result.score}</p>
+            <p>Word: {result.matched_word}</p>
+            <p>Repeated Words: {result.repeated_words}</p>
+            <p>Transcript: {result.transcribed_text}</p>
+          </div>
+        )}
       </div>
     </div>
   )
