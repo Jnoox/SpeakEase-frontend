@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { authRequest } from "../../lib/auth"
 
-export default function Profile({ user }) {
+export default function Profile() {
 
   const [profileData, setProfileData] = useState(null)
   const [userData, setUserData] = useState(null)
@@ -45,6 +45,7 @@ export default function Profile({ user }) {
 
   // source helper: https://git.generalassemb.ly/SDA-SEB-02-V/DRF-example/blob/main/cat-collector-frontend/src/components/CatForm/CatForm.jsx
 
+  // for updating user profile
   async function handleEditProfile(e) {
     e.preventDefault()
     try {
@@ -54,18 +55,23 @@ export default function Profile({ user }) {
         data: formData
       })
       setProfileData(response.data)
-      setIsEditing(false)
+      setEditingData(false)
     } catch (err) {
       console.error(err)
     }
   }
+
+  function handleChange(event) {
+        setFormData({ ...formData, [event.target.name]: event.target.value })
+        console.log(formData)
+    }
 
 
   return (
     <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
       <h1>My Profile</h1>
       <h2>Account Information</h2>
-      {userData ? (
+      {userData && profileData? (
         <div>
           <div>Username: {userData.username} </div>
           <div>Email: {userData.email}</div>
@@ -79,7 +85,7 @@ export default function Profile({ user }) {
         <p>Loading profile...</p>
       )}
 
-      {EditingData = false  (
+      {EditingData === false &&(
         <div>
           <button onClick={() => setEditingData(true)}>
             Edit Profile
@@ -87,6 +93,35 @@ export default function Profile({ user }) {
         </div>
       )}
       
-    </div>
-  )
-}
+
+      { EditingData && (
+        <div>
+          <div>
+            <label>Full Name:</label>
+            <input type="text" name="full_name" value={formData.full_name} onChange={handleChange} />
+          </div>
+
+          <div>
+            <label>Age:</label>
+            <input type="number" name="age" value={formData.age} onChange={handleChange} min="1" max="120" />
+          </div>
+
+          <div>
+            <button onClick={handleEditProfile}>
+              Save Changes
+            </button>
+            <button onClick={() => {
+              setEditingData(false) 
+              // set user inputs
+              setFormData({
+                full_name: profileData.full_name, age: profileData.age
+              })
+            }}>
+              Cancel
+            </button>
+          </div>
+
+        </div>
+         )}
+         </div>
+      )}
