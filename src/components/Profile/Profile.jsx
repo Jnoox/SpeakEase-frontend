@@ -63,21 +63,21 @@ export default function Profile() {
   }
 
   function handleChange(event) {
-        setFormData({ ...formData, [event.target.name]: event.target.value })
-        console.log(formData)
-    }
+    setFormData({ ...formData, [event.target.name]: event.target.value })
+    console.log(formData)
+  }
 
 
   return (
     <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
       <h1>My Profile</h1>
       <h2>Account Information</h2>
-      {userData && profileData && !EditingData? (
+      {userData && profileData && !EditingData ? (
         <div>
           <div>Username: {userData.username} </div>
           <div>Email: {userData.email}</div>
           {/* <div>First Name: {userData.first_name}</div>
-        <div>Last Name: {userData.last_name}</div> */}
+        <div>Last Name: {userData.last_name}</div>  */}
           <div>Full Name: {profileData.full_name}</div>
           <div>Age: {profileData.age}</div>
           <div>Total Training Time: {profileData.total_training_time} seconds</div>
@@ -85,19 +85,19 @@ export default function Profile() {
       ) : (
         // <p>Loading profile...</p>
         <p></p>
-        
+
       )}
 
-      {EditingData === false &&(
+      {EditingData === false && (
         <div>
           <button onClick={() => setEditingData(true)}>
             Edit Profile
           </button>
         </div>
       )}
-      
 
-      { EditingData && (
+
+      {EditingData && (
         <div>
           <div>
             <label>Full Name:</label>
@@ -114,7 +114,7 @@ export default function Profile() {
               Save Changes
             </button>
             <button onClick={() => {
-              setEditingData(false) 
+              setEditingData(false)
               // set user inputs
               setFormData({
                 full_name: profileData.full_name, age: profileData.age
@@ -126,6 +126,7 @@ export default function Profile() {
           </div>
 
         </div>
-         )}
-         </div>
       )}
+    </div>
+  )
+}
