@@ -33,7 +33,7 @@ export default function App() {
           path="/profile"
           element={
             <ProtectedRoute>
-              <Profile />
+              <Profile  user={user} />
             </ProtectedRoute>
           }
         />

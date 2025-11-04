@@ -38,7 +38,7 @@ export default function TipTraining() {
         <p>— {tip.author}</p>
       </div>
       ) :(
-        <p>Loading...</p>
+        <p>Loading tips...</p>
       )}
       <button onClick={getRandomTip}>Get Another Tip</button>
     </div>
