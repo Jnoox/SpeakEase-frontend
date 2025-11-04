@@ -4,7 +4,7 @@ import axios from 'axios'
 
 export default function Profile({user}) {
 
-  const [profile, setProfile] = useState(null)
+  const [profileData, setProfileData] = useState(null)
   const [userData, setUserData] = useState(null)
   const [formData, setFormData] = useState({
     full_name: '',
@@ -27,7 +27,7 @@ export default function Profile({user}) {
       method: 'get',
       url: 'http://127.0.0.1:8000/api/profile/'
     })
-    setProfile(profileResponse.data)
+    setProfileData(profileResponse.data)
     console.log(profileResponse.data)
     
     setFormData({
@@ -43,10 +43,27 @@ useEffect(() => {
   getProfileData()
 }, [])
 
+// source helper: https://git.generalassemb.ly/SDA-SEB-02-V/DRF-example/blob/main/cat-collector-frontend/src/components/CatForm/CatForm.jsx
+
 
   return (
     <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
       <h1>My Profile</h1>
+      <h2>Account Information</h2>
+      { userData && profileData ?(
+      <div>
+        <div>Username: {userData.username}</div>
+        <div>Email: {userData.email}</div>
+        {/* <div>First Name: {userData.first_name}</div>
+        <div>Last Name: {userData.last_name}</div> */}
+        <div>Full Name: {profileData.full_name}</div>
+        <div>Age: {profileData.age}</div>
+        <div>Total Training Time: {profileData.total_training_time}</div>
+      </div>
+      ) :(
+        <p>Loading Account Information...</p>
+      )}
+
 
     </div>
   )
