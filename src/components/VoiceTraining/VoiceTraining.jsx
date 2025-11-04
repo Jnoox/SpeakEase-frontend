@@ -8,10 +8,68 @@ export default function VoiceTraining() {
   const [word, setWord] = useState(null)
   const [audioRecord, setAudioRecord] = useState(null)
   const [result, setResult] = useState(null)
-  const [timer, setTimer] = useState(null)
   const [wavAudio, setWavAudio] = useState(null);
   const [recordingStatus, setRecordingStatus] = useState(null)
   const [audioDuration, setAudioDuration] = useState(0);
+  const [timer, setTimer] = useState("00:00:00");
+
+  // source helper: https://www.geeksforgeeks.org/reactjs/how-to-create-a-countdown-timer-using-reactjs/
+  const Ref = useRef(null);
+  const getTimeRemaining = (e) => {
+        const total =
+            Date.parse(e) - Date.parse(new Date());
+        const seconds = Math.floor((total / 1000) % 60);
+        const minutes = Math.floor(
+            (total / 1000 / 60) % 60
+        );
+        const hours = Math.floor(
+            (total / 1000 / 60 / 60) % 24
+        );
+        return {
+            total,
+            hours,
+            minutes,
+            seconds,
+        };
+    };
+
+  const startTimer = (e) => {
+    let { total, hours, minutes, seconds } =
+      getTimeRemaining(e);
+    if (total >= 0) {
+      setTimer(
+        (hours > 9 ? hours : "0" + hours) +
+        ":" +
+        (minutes > 9
+          ? minutes
+          : "0" + minutes) +
+        ":" +
+        (seconds > 9 ? seconds : "0" + seconds)
+      );
+    }
+  };
+
+
+  const clearTimer = (e) => {
+    setTimer("00:05:00");
+    if (Ref.current) clearInterval(Ref.current);
+    const id = setInterval(() => {
+      startTimer(e);
+    }, 1000);
+    Ref.current = id;
+  };
+
+  const getDeadTime = () => {
+    let deadline = new Date();
+    deadline.setSeconds(deadline.getSeconds() + 300);
+    return deadline;
+  };
+
+
+  const onClickReset = () => {
+    clearTimer(getDeadTime());
+  };
+
 
   //source helper: https://www.cybrosys.com/blog/how-to-implement-audio-recording-in-a-react-application
   async function getRandomWord() {
@@ -22,6 +80,7 @@ export default function VoiceTraining() {
       })
       console.log(response.data)
       setWord(response.data)
+      setResult(null);
     } catch (error) {
       console.log(error)
     }
@@ -36,8 +95,13 @@ export default function VoiceTraining() {
   const mediaRecorder = useRef(null);
   const chunks = useRef([]);
   const mediaStream = useRef(null);
+
   const startRecording = async () => {
     try {
+
+      // this start timer when click start record
+      clearTimer(getDeadTime()); 
+
       const stream = await navigator.mediaDevices.getUserMedia(
         { audio: true }
       );
@@ -71,6 +135,10 @@ export default function VoiceTraining() {
   };
 
   const stopRecording = () => {
+
+    // stop the timer 
+    if (Ref.current) clearInterval(Ref.current);
+
     if (mediaRecorder.current && mediaRecorder.current.state === 'recording') {
       mediaRecorder.current.stop();
     }
@@ -120,6 +188,7 @@ export default function VoiceTraining() {
   }
 
   async function sendAudio(e) {
+    
     e.preventDefault()
     try {
 
@@ -136,6 +205,8 @@ export default function VoiceTraining() {
       })
 
       setResult(response.data)
+      // reset the timer
+      setTimer("00:00:00"); 
       console.log(result)
 
     } catch (err) {
@@ -147,15 +218,17 @@ export default function VoiceTraining() {
     <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
       <h1>Describe a Word</h1>
       <div>
-        { word ?(
-      <div>
-        <div>{word.word}</div>
-      </div>
-      ) :(
-        <p>Loading words...</p>
-      )}
+        {word ? (
+          <div>
+            <div>{word.word}</div>
+          </div>
+        ) : (
+          <p>Loading words...</p>
+        )}
         <button onClick={startRecording}>Start Recording</button>
         <button onClick={stopRecording}>Stop Recording</button>
+        <h2>{timer}</h2>
+        <button onClick={onClickReset}>Reset</button>
         <button onClick={sendAudio}>Send Audio</button>
         {result && (
           <div>
@@ -170,6 +243,9 @@ export default function VoiceTraining() {
             <p>FeedBack: {result.feedback_text}</p>
           </div>
         )}
+
+        <button onClick={getRandomWord}>Describe another word</button>
+
       </div>
     </div>
   )
