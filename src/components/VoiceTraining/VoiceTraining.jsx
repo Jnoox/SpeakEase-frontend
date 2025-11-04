@@ -29,7 +29,9 @@ export default function VoiceTraining() {
   }, [])
 
 
-  
+  const [recordedUrl, setRecordedUrl] = useState('');
+  const mediaRecorder = useRef(null);
+  const chunks = useRef([]);
   const mediaStream = useRef(null);
   const startRecording = async () => {
     try {
@@ -37,8 +39,34 @@ export default function VoiceTraining() {
         { audio: true }
       );
       mediaStream.current = stream;
+      mediaRecorder.current = new MediaRecorder(stream);
+      mediaRecorder.current.ondataavailable = (e) => {
+        if (e.data.size > 0) {
+          chunks.current.push(e.data);
+        }
+      };
+      mediaRecorder.current.onstop = () => {
+        const recordedBlob = new Blob(
+          chunks.current, { type: 'audio/webm' }
+        );
+        const url = URL.createObjectURL(recordedBlob);
+        setRecordedUrl(url);
+        chunks.current = [];
+      };
+      mediaRecorder.current.start();
     } catch (error) {
       console.error('Error accessing microphone:', error);
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorder.current && mediaRecorder.current.state === 'recording') {
+      mediaRecorder.current.stop();
+    }
+    if (mediaStream.current) {
+      mediaStream.current.getTracks().forEach((track) => {
+        track.stop();
+      });
     }
   };
 
@@ -47,6 +75,7 @@ export default function VoiceTraining() {
       <h1>Describe a Word</h1>
       <div>
       <button onClick={startRecording}>Start Recording</button>
+      <button onClick={stopRecording}>Stop Recording</button>
     </div>
     </div>
   )
