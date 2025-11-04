@@ -21,7 +21,7 @@ export default function VoiceTraining() {
         url: 'http://127.0.0.1:8000/api/vocabulary/'
       })
       console.log(response.data)
-      setWord(response.data.word)
+      setWord(response.data)
     } catch (error) {
       console.log(error)
     }
@@ -147,17 +147,27 @@ export default function VoiceTraining() {
     <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
       <h1>Describe a Word</h1>
       <div>
+        { word ?(
+      <div>
+        <div>{word.word}</div>
+      </div>
+      ) :(
+        <p>Loading words...</p>
+      )}
         <button onClick={startRecording}>Start Recording</button>
         <button onClick={stopRecording}>Stop Recording</button>
         <button onClick={sendAudio}>Send Audio</button>
-        <h3>Result:</h3>
         {result && (
           <div>
             <h3>Result:</h3>
             <p>Score: {result.score}</p>
-            <p>Word: {result.matched_word}</p>
-            <p>Repeated Words: {result.repeated_words}</p>
+            <p>Rating: {result.analysis.rating}</p>
+            <p>Words Per Minutes/WPM: {result.analysis.wpm}</p>
             <p>Transcript: {result.transcribed_text}</p>
+            {/* <p>Rating: {result.rating}</p> */}
+            <p>Repeated Words: {result.repeated_words}</p>
+            <p>Mispronunciations Words: {result.mispronunciations}</p>
+            <p>FeedBack: {result.feedback_text}</p>
           </div>
         )}
       </div>
