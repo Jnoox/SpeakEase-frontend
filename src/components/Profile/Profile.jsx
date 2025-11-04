@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { authRequest } from "../../lib/auth"
 
+// source helper: https://jasonwatmore.com/post/2020/11/02/react-fetch-http-put-request-examples
 export default function Profile() {
 
   const [profileData, setProfileData] = useState(null)
@@ -71,7 +72,7 @@ export default function Profile() {
     <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
       <h1>My Profile</h1>
       <h2>Account Information</h2>
-      {userData && profileData? (
+      {userData && profileData && !EditingData? (
         <div>
           <div>Username: {userData.username} </div>
           <div>Email: {userData.email}</div>
@@ -79,10 +80,12 @@ export default function Profile() {
         <div>Last Name: {userData.last_name}</div> */}
           <div>Full Name: {profileData.full_name}</div>
           <div>Age: {profileData.age}</div>
-          <div>Total Training Time: {profileData.total_training_time}</div>
+          <div>Total Training Time: {profileData.total_training_time} seconds</div>
         </div>
       ) : (
-        <p>Loading profile...</p>
+        // <p>Loading profile...</p>
+        <p></p>
+        
       )}
 
       {EditingData === false &&(
@@ -117,6 +120,7 @@ export default function Profile() {
                 full_name: profileData.full_name, age: profileData.age
               })
             }}>
+              {/* to cancel editing */}
               Cancel
             </button>
           </div>
