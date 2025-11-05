@@ -32,12 +32,11 @@ export default function Dashboard() {
           <h2>Your Progress Analytics</h2>
           
            <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
             gap: '20px',
             marginTop: '20px'
           }}>
-            
+
           <div style={{ 
               border: '1px solid #ddd', 
               padding: '20px', 

@@ -15,22 +15,22 @@ export default function VoiceTraining() {
   // source helper: https://www.geeksforgeeks.org/reactjs/how-to-create-a-countdown-timer-using-reactjs/
   const Ref = useRef(null);
   const getTimeRemaining = (e) => {
-        const total =
-            Date.parse(e) - Date.parse(new Date());
-        const seconds = Math.floor((total / 1000) % 60);
-        const minutes = Math.floor(
-            (total / 1000 / 60) % 60
-        );
-        const hours = Math.floor(
-            (total / 1000 / 60 / 60) % 24
-        );
-        return {
-            total,
-            hours,
-            minutes,
-            seconds,
-        };
+    const total =
+      Date.parse(e) - Date.parse(new Date());
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor(
+      (total / 1000 / 60) % 60
+    );
+    const hours = Math.floor(
+      (total / 1000 / 60 / 60) % 24
+    );
+    return {
+      total,
+      hours,
+      minutes,
+      seconds,
     };
+  };
 
   const startTimer = (e) => {
     let { total, hours, minutes, seconds } =
@@ -99,7 +99,7 @@ export default function VoiceTraining() {
     try {
 
       // this start timer when click start record
-      clearTimer(getDeadTime()); 
+      clearTimer(getDeadTime());
 
       const stream = await navigator.mediaDevices.getUserMedia(
         { audio: true }
@@ -181,7 +181,7 @@ export default function VoiceTraining() {
   }
 
   async function sendAudio(e) {
-    
+
     e.preventDefault()
     try {
 
@@ -199,7 +199,7 @@ export default function VoiceTraining() {
 
       setResult(response.data)
       // reset the timer
-      setTimer("00:00:00"); 
+      setTimer("00:00:00");
       console.log(result)
 
     } catch (err) {
@@ -223,17 +223,35 @@ export default function VoiceTraining() {
         <h2>{timer}</h2>
         <button onClick={onClickReset}>Reset</button>
         <button onClick={sendAudio}>Send Audio</button>
-        {result && (
+        {result ?(
           <div>
             <h3>Result:</h3>
-            <p>Score: {result.score}</p>
+            <p>Score: {result.score}%</p>
             <p>Rating: {result.analysis.rating}</p>
             <p>Words Per Minutes/WPM: {result.analysis.wpm}</p>
             <p>Transcript: {result.transcribed_text}</p>
-            <p>Repeated Words: {result.repeated_words}</p>
-            <p>Mispronunciations Words: {result.mispronunciations}</p>
+            {/* source helper: https://javascript.info/keys-values-entries */}
+            <p>
+             Repeated Words:{" "}
+            {Object.keys(result.analysis.repeated_words).length > 0
+           ? Object.entries(result.analysis.repeated_words).map(([word, count]) => (
+           <span key={word}>{word} ({count}) </span>
+            ))
+            : "None"}
+           </p>
+          <p>Mispronounced Words:
+           {result.analysis.mispronounced_words.length > 0 ?(
+         <span>{result.analysis.mispronounced_words.join(", ")}</span>
+        
+          ) : (
+         <p>None</p>
+           )}
+           </p>
+            <p>Pauses: {result.analysis.pauses_percentage}%</p>
             <p>FeedBack: {result.feedback_text}</p>
           </div>
+        ): (
+          <p>Record your voice to get the result</p>
         )}
 
         <button onClick={getRandomWord}>Describe another word</button>
