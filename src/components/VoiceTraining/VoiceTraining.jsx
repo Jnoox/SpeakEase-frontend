@@ -10,7 +10,8 @@ export default function VoiceTraining() {
   const [wavAudio, setWavAudio] = useState(null);
   const [recordingStatus, setRecordingStatus] = useState(null)
   const [audioDuration, setAudioDuration] = useState(0);
-  const [timer, setTimer] = useState("00:00:00");
+  const [timer, setTimer] = useState("00:05:00");
+
 
   // source helper: https://www.geeksforgeeks.org/reactjs/how-to-create-a-countdown-timer-using-reactjs/
   const Ref = useRef(null);
@@ -49,13 +50,9 @@ export default function VoiceTraining() {
   };
 
 
-  const clearTimer = (e) => {
+  const clearTimer = () => {
     setTimer("00:05:00");
     if (Ref.current) clearInterval(Ref.current);
-    const id = setInterval(() => {
-      startTimer(e);
-    }, 1000);
-    Ref.current = id;
   };
 
   const getDeadTime = () => {
@@ -64,10 +61,6 @@ export default function VoiceTraining() {
     return deadline;
   };
 
-
-  const onClickReset = () => {
-    clearTimer(getDeadTime());
-  };
 
 
   //source helper: https://www.cybrosys.com/blog/how-to-implement-audio-recording-in-a-react-application
@@ -98,9 +91,14 @@ export default function VoiceTraining() {
   const startRecording = async () => {
     try {
 
+      // so that not display that record done
+      setRecordingStatus(null);
       // this start timer when click start record
-      clearTimer(getDeadTime());
+      clearTimer();
+      const deadline = getDeadTime();
+      Ref.current = setInterval(() => startTimer(deadline), 1000);
 
+      
       const stream = await navigator.mediaDevices.getUserMedia(
         { audio: true }
       );
@@ -146,6 +144,8 @@ export default function VoiceTraining() {
         track.stop();
       });
     }
+    //to set record status to done when user stop record 
+    setRecordingStatus("done");
   };
 
   //source helper: https://gist.github.com/Bang9/637655131120b37bbf76c392d1ef99a8
@@ -201,6 +201,7 @@ export default function VoiceTraining() {
       // reset the timer
       setTimer("00:00:00");
       console.log(result)
+      
 
     } catch (err) {
       console.error(err)
@@ -221,9 +222,7 @@ export default function VoiceTraining() {
         <button onClick={startRecording}>Start Recording</button>
         <button onClick={stopRecording}>Stop Recording</button>
         <h2>{timer}</h2>
-        <button onClick={onClickReset}>Reset</button>
-        <button onClick={sendAudio}>Send Audio</button>
-        {result ?(
+        {result ? (
           <div>
             <h3>Result:</h3>
             <p>Score: {result.score}%</p>
@@ -232,30 +231,43 @@ export default function VoiceTraining() {
             <p>Transcript: {result.transcribed_text}</p>
             {/* source helper: https://javascript.info/keys-values-entries */}
             <p>
-             Repeated Words:{" "}
-            {Object.keys(result.analysis.repeated_words).length > 0
-           ? Object.entries(result.analysis.repeated_words).map(([word, count]) => (
-           <span key={word}>{word} ({count}) </span>
-            ))
-            : "None"}
-           </p>
-          <p>Mispronounced Words:
-           {result.analysis.mispronounced_words.length > 0 ?(
-         <span>{result.analysis.mispronounced_words.join(", ")}</span>
-        
-          ) : (
-         <p>None</p>
-           )}
-           </p>
+              Repeated Words:{" "}
+              {Object.keys(result.analysis.repeated_words).length > 0
+                ? Object.entries(result.analysis.repeated_words).map(([word, count]) => (
+                  <span key={word}>{word} ({count}) </span>
+                ))
+                : "None"}
+            </p>
+            <p>Mispronounced Words:
+              {result.analysis.mispronounced_words.length > 0 ? (
+                <span>{result.analysis.mispronounced_words.join(", ")}</span>
+
+              ) : (
+                <p>None</p>
+              )}
+            </p>
             <p>Pauses: {result.analysis.pauses_percentage}%</p>
             <p>FeedBack: {result.feedback_text}</p>
           </div>
-        ): (
-          <p>Record your voice to get the result</p>
+        ) : (
+          <p></p>
         )}
 
-        <button onClick={getRandomWord}>Describe another word</button>
+        {recordingStatus === "done" && (
+          <p>The audio recorded successfully</p>
+        )}
 
+        {recordingStatus === "done" && (
+          <div>
+            <button onClick={sendAudio}>Send</button>
+
+            <button onClick={() => {
+              setRecordedUrl(""); setAudioRecord(null); setWavAudio(null); setRecordingStatus(null); setTimer("00:05:00"); setResult(null);
+            }}> Delete </button>
+          </div>
+        )}
+
+        <button onClick={() => { stopRecording(); clearTimer(); setRecordingStatus(null); setRecordedUrl(""); setAudioRecord(null); setWavAudio(null); setResult(null); getRandomWord();}}> Describe another word </button>
       </div>
     </div>
   )
