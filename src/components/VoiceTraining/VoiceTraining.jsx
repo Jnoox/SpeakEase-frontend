@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react"
 import { authRequest } from "../../lib/auth"
-import axios from 'axios'
 import toWav from "audiobuffer-to-wav";
 
 export default function VoiceTraining() {
@@ -162,16 +161,10 @@ export default function VoiceTraining() {
           arrayBuffer,
           (audioBuffer) => {
 
+            //count audio duration
             const duration = audioBuffer.duration;
             setAudioDuration(duration);
 
-            // // source helper: https://stackoverflow.com/questions/65520105/how-to-get-audio-file-duration-in-react-typescript
-            // // get audio duration
-            // const audio = document.createElement("audio");
-            // audio.src = url;
-            // audio.addEventListener("loadedmetadata", () => {
-            //   setAudioDuration(audio.duration);
-            // });
             const wavData = toWav(audioBuffer);
             const wavBlob = new Blob([new DataView(wavData)], {
               type: "audio/wav",
@@ -237,7 +230,6 @@ export default function VoiceTraining() {
             <p>Rating: {result.analysis.rating}</p>
             <p>Words Per Minutes/WPM: {result.analysis.wpm}</p>
             <p>Transcript: {result.transcribed_text}</p>
-            {/* <p>Rating: {result.rating}</p> */}
             <p>Repeated Words: {result.repeated_words}</p>
             <p>Mispronunciations Words: {result.mispronunciations}</p>
             <p>FeedBack: {result.feedback_text}</p>

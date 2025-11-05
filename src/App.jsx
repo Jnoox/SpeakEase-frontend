@@ -8,6 +8,8 @@ import SignUp from "./components/Auth/SignUp"
 import VoiceTraining from "./components/VoiceTraining/VoiceTraining"
 import TipTraining from "./components/TipTraining/TipTraining"
 import Profile from "./components/Profile/Profile"
+import Dashboard from "./components/Dashboard/Dashboard"
+
 
 export default function App() {
   // Read user from saved JWT
@@ -20,6 +22,14 @@ export default function App() {
       <Routes>
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+               <h1>Welcome to SpeakEase 🎤✨</h1>
+               <Dashboard />
+             </ProtectedRoute>
+             }/>
          <Route
           path="/training"
           element={
@@ -37,10 +47,7 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/"
-          element={<h1>Welcome to SpeakEase 🎤✨</h1>}
-        />
+        
       </Routes>
     </Router>
   )
