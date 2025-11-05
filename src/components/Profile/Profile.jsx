@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react"
 import { authRequest } from "../../lib/auth"
+import { useNavigate } from 'react-router'
 
 // source helper: https://jasonwatmore.com/post/2020/11/02/react-fetch-http-put-request-examples
 export default function Profile() {
 
+  const navigate = useNavigate()
   const [profileData, setProfileData] = useState(null)
   const [userData, setUserData] = useState(null)
   const [EditingData, setEditingData] = useState(false)
@@ -67,6 +69,21 @@ export default function Profile() {
     console.log(formData)
   }
 
+  //source helper: https://stackoverflow.com/questions/66896221/removing-the-token-from-local-storage
+  //source helper: https://stackoverflow.com/questions/74335838/how-to-delete-user-account-when-user-clicks-delete-button-in-react
+  async function handleDeleteAccount() {
+    try {
+      await authRequest({
+        method: 'delete',
+        url: 'http://127.0.0.1:8000/api/profile/'
+      })
+      localStorage.removeItem('access_token')
+      localStorage.removeItem('refresh_token')
+      navigate('/')
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
@@ -92,6 +109,9 @@ export default function Profile() {
         <div>
           <button onClick={() => setEditingData(true)}>
             Edit Profile
+          </button>
+          <button onClick={handleDeleteAccount}>
+            Delete Account
           </button>
         </div>
       )}
