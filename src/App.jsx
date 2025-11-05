@@ -9,6 +9,7 @@ import VoiceTraining from "./components/VoiceTraining/VoiceTraining"
 import TipTraining from "./components/TipTraining/TipTraining"
 import Profile from "./components/Profile/Profile"
 import Dashboard from "./components/Dashboard/Dashboard"
+import Home from "./components/Home/Home";
 
 
 export default function App() {
@@ -25,15 +26,13 @@ export default function App() {
         <Route
           path="/"
           element={
-            <ProtectedRoute>
-               <h1>Welcome to SpeakEase 🎤✨</h1>
-               <Dashboard />
-             </ProtectedRoute>
-             }/>
+          <Home user={user}/>
+            }/>
          <Route
           path="/training"
           element={
             <ProtectedRoute>
+              <Dashboard />
               <VoiceTraining />
               <TipTraining/>
             </ProtectedRoute>
