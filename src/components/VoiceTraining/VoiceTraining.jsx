@@ -47,6 +47,11 @@ export default function VoiceTraining() {
         (seconds > 9 ? seconds : "0" + seconds)
       );
     }
+    // if the timer finish it should stop recording automatically 
+     if (total <= 0) {
+    stopRecording();           
+    setRecordingStatus("done"); 
+  }
   };
 
 
@@ -60,8 +65,6 @@ export default function VoiceTraining() {
     deadline.setSeconds(deadline.getSeconds() + 300);
     return deadline;
   };
-
-
 
   //source helper: https://www.cybrosys.com/blog/how-to-implement-audio-recording-in-a-react-application
   async function getRandomWord() {
@@ -201,7 +204,7 @@ export default function VoiceTraining() {
       // reset the timer
       setTimer("00:00:00");
       console.log(result)
-      
+
 
     } catch (err) {
       console.error(err)
