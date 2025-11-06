@@ -40,7 +40,7 @@ https://github.com/Jnoox/SpeakEase-backend
 ![alt text](image.png)
 
 
-## Key Features
+## 🎯Key Features
 ### Authentication:
 
 JWT-based authentication with token refresh.
@@ -125,7 +125,7 @@ Account deletion with confirmation
 Real-time profile updates
 
 
-## IceBox Features:
+## 🧊 IceBox Features:
 ### Daily Conversation via Camera
 
 #### Workflow:
