@@ -28,6 +28,7 @@ export default function TipTraining() {
   }
 
   return (
+        <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
      <div style={{ border: '2px solid #667eea', borderRadius: '15px',padding: '30px',
             marginTop: '20px',background: 'white'
           }}>
@@ -50,8 +51,10 @@ export default function TipTraining() {
         <p style={{ textAlign: 'center' }}>Loading tips...</p>
       )}
       <button style={{padding: '12px 30px',background: '#667eea',color: 'white',borderRadius: '8px',
-            fontSize: '16px',fontWeight: 'bold'
+            fontSize: '16px',
+fontWeight: 'bold'
           }}onClick={getRandomTip}>Get Another Tip</button>
+    </div>
     </div>
     </div>
   )

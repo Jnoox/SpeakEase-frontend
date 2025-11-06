@@ -25,7 +25,9 @@ export default function Dashboard() {
   }, [])
 
   return (
-    <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
+    
+     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+    <div  style={{ maxWidth: '600px', width: '100%', padding: '20px'  }}>
        <h1>Dashboard</h1>
       {analytics ? (
         <div>
@@ -80,5 +82,6 @@ export default function Dashboard() {
         Refresh Data
       </button> 
     </div>
+     </div>
   )
 }

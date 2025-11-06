@@ -212,7 +212,8 @@ export default function VoiceTraining() {
   }
 
   return (
-     <div style={{ border: '2px solid #667eea', borderRadius: '15px',padding: '30px',
+    <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+     <div style={{  border: '2px solid #667eea', borderRadius: '15px',padding: '30px',
         marginTop: '20px',background: 'white',
           }}>
     <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
@@ -326,5 +327,6 @@ export default function VoiceTraining() {
       </div>
     </div>
     </div>
+</div>
   )
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 
 export default function Home({ user }) {
   return (
+    
     <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
       
       {/* Section 1: Welcome Section */}
