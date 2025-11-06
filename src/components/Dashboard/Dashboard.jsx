@@ -64,7 +64,7 @@ export default function Dashboard() {
 
               <div style={{ padding: '20px', borderRadius: '8px',textAlign: 'center',background: '#f8f9fa'}}>
                 <h3 style={{ margin: '0 0 10px 0', fontSize: '16px', color: '#667eea' }}>Total Training Time</h3>
-                <p style={{ margin: '0', fontSize: '32px', fontWeight: 'bold', color: '#2c3e50' }}>{analytics.total_training_time}</p>
+                <p style={{ margin: '0', fontSize: '32px', fontWeight: 'bold', color: '#2c3e50' }}>{analytics.total_training_time} seconds</p>
               </div>
             </div>
           </div>

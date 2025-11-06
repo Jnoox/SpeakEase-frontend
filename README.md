@@ -1,16 +1,161 @@
-# React + Vite
+# SpeakEase Backend
+## 💡 Project Name:
+### SpeakEase
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### 🎯 Project Description:
+SpeakEase is an interactive web platform designed to help individuals who struggle with speaking fluently and expressing themselves. The platform uses AI-powered analysis of voice and facial expressions to improve:
 
-Currently, two official plugins are available:
+- Pronunciation accuracy
+- Speaking confidence
+- Communication skills
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
 
-## React Compiler
+React 19.1.1
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+React Router 7.9.4
 
-## Expanding the ESLint configuration
+Axios - HTTP client
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+jwt-decode
+
+JavaScript (ES6+)
+
+CSS3 - Custom styling
+
+@ffmpeg/ffmpeg 0.12.15 (Video/audio processing in browser)
+
+audiobuffer-to-wav 1.0.0 (Audio conversion)
+
+Web Audio API - Audio recording
+
+
+
+## Backend Repo Link
+https://github.com/Jnoox/SpeakEase-backend
+
+
+
+## 🔁 Routing Table:
+![alt text](image.png)
+
+
+## Key Features
+### Authentication:
+
+JWT-based authentication with token refresh.
+
+Secure login/signup with validation.
+
+Protected routes for authenticated users.
+
+Automatic token management (localStorage).
+
+Logout functionality.
+
+### Voice Training Module:
+
+Record audio up to 5 minutes.
+
+Real-time countdown timer (5:00).
+
+Describe a Word exercise with random vocabulary.
+
+Audio conversion (WebM → WAV).
+
+Instant AI analysis with detailed feedback:
+
+- Overall score (0-100).
+
+- Words per minute (WPM).
+
+- Speech rate category (Slow/Normal/Fast).
+
+- Mispronounced words detection.
+
+- Repeated words analysis.
+
+- Pause percentage.
+
+- Full transcription.
+
+Delete and re-record capability.
+
+New word generation.
+
+
+### Tips & Tricks:
+
+Random motivational tips.
+
+Categories: Voice, Conversation, General.
+
+Refresh for new tips.
+
+Expert guidance and techniques.
+
+
+### Dashboard (Progress Analytics):
+
+Average Score - Overall performance metric.
+
+Best Score - Highest achievement.
+
+Worst Score - Area for improvement tracking.
+
+Total Sessions - Training frequency.
+
+Total Training Time - Cumulative practice duration.
+
+Real-time data refresh.
+
+Visual stat cards with color coding.
+
+
+### Profile Management:
+
+View account information.
+
+Edit profile (full name, age).
+
+Track total training time.
+
+Account deletion with confirmation
+
+Real-time profile updates
+
+
+## IceBox Features:
+### Daily Conversation via Camera
+
+#### Workflow:
+
+Camera interface to record answers.
+
+Timer for each question.
+
+Upload video for AI analysis.
+
+Display feedback results in charts and scores.
+
+Why: Visual feedback improves confidence and presentation skills.
+
+### User Goals Page
+
+#### Workflow:
+
+List user goals.
+
+Add, update, or delete goals.
+
+Track goal completion progress.
+
+### AI Coach for Interview Training
+
+#### Workflow:
+
+Camera interface for interview questions.
+
+Display AI coaching feedback per session.
+
+Option to retry and track progress.
