@@ -26,11 +26,11 @@ export default function Login({ setUser }) {
 
   return (
     <div style={{
-  position: 'absolute',
-  left: '50%',
-  transform: 'translateX(-50%)',
-  padding: '20px',
-  maxWidth: '1200px'
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  minHeight: '100vh', 
+  paddingLeft: '500px',
 }}>
     <form style={{background: 'white',padding: '40px',borderRadius: '15px',boxShadow: '0 5px 20px rgba(0,0,0,0.1)',width: '100%',maxWidth: '400px'}} onSubmit={handleSubmit}>
       <h2 style={{textAlign: 'center',color: '#2c3e50',marginBottom: '30px',fontSize: '28px'}}>Login</h2>
@@ -39,7 +39,7 @@ export default function Login({ setUser }) {
               fontSize: '16px'}}value={username} onChange={e => setUsername(e.target.value)} />
           <label style={{display: 'block',marginBottom: '8px',color: '#2c3e50',fontWeight: '500'}}>Password</label>
       <input style={{width: '100%',padding: '12px',border: '2px solid #e0e0e0',borderRadius: '8px',fontSize: '16px'}} type="password" value={password} onChange={e => setPassword(e.target.value)} />
-      <button style={{width: '100%',padding: '14px',background: '#667eea',color: 'white',border: 'none',
+      <button style={{width: '100%',padding: '14px',background: '#667eea',color: 'white',marginTop: '30px',
             borderRadius: '8px',fontSize: '16px',fontWeight: 'bold',}}>Login</button>
     </form>
     </div>

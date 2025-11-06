@@ -26,15 +26,25 @@ export default function App() {
         <Route
           path="/"
           element={
-          <Home user={user}/>
-            }/>
-         <Route
+            <Home user={user} />
+          } />
+        <Route
           path="/training"
           element={
             <ProtectedRoute>
-              <Dashboard />
-              <VoiceTraining />
-              <TipTraining/>
+              <div style={{ display: "flex", justifyContent: "center", marginBottom: "40px" }}>
+                <Dashboard />
+              </div>
+              <h1 style={{ fontSize: '48px', marginBottom: '10px', color: '#2c3e50', textAlign:'center' }}>Training Options</h1>
+              <div style={{  marginLeft:'30px', display: "flex", justifyContent: "center", gap: "20px", flexWrap: "wrap", marginBottom:'40px' }}>
+                <div style={{ flex: "1 1 400px", maxWidth: "500px" }}>
+                  
+                  <VoiceTraining /> 
+                </div>
+                <div style={{flex: "1 1 400px", maxWidth: "600px" }}>
+                   <TipTraining /> 
+                </div>
+              </div>
             </ProtectedRoute>
           }
         />
@@ -42,11 +52,11 @@ export default function App() {
           path="/profile"
           element={
             <ProtectedRoute>
-              <Profile  user={user} />
+              <Profile user={user} />
             </ProtectedRoute>
           }
         />
-        
+
       </Routes>
     </Router>
   )

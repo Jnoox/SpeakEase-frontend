@@ -212,11 +212,10 @@ export default function VoiceTraining() {
   }
 
   return (
-    <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
      <div style={{  border: '2px solid #667eea', borderRadius: '15px',padding: '30px',
         marginTop: '20px',background: 'white',
           }}>
-    <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
+    <div style={{ padding: '32px', maxWidth: '600px', margin: '0 auto' }}>
       <h1>Describe a Word</h1>
       <p style={{ margin: '0 0 20px 0', color: '#7f8c8d', fontSize: '14px' }}>
         Practice describing words to improve your vocabulary and speaking fluency with AI-powered feedback.
@@ -327,6 +326,5 @@ export default function VoiceTraining() {
       </div>
     </div>
     </div>
-</div>
   )
 }

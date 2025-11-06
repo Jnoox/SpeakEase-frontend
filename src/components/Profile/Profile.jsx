@@ -86,7 +86,23 @@ export default function Profile() {
   }
 
   return (
-    <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
+    <div style={{
+  display: 'flex',
+  flexDirection: 'column',  
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '100vh',
+  paddingLeft: '500px',
+}}>
+  <div style={{
+    padding: '20px',
+    maxWidth: '600px',
+    width: '100%',
+    background: 'white',
+    borderRadius: '15px',
+    boxShadow: '0 5px 20px rgba(0,0,0,0.1)',
+
+  }}>
       <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#2c3e50',fontSize: '36px'
       }}>My Profile</h1>
       <h2 style={{ margin: '0 0 30px 0', color: '#667eea',fontSize: '24px',
@@ -111,12 +127,12 @@ export default function Profile() {
 
       {EditingData === false && (
         <div>
-          <button style={{padding: '12px 30px',background: '#667eea',color: 'white',border: 'none',
+          <button style={{marginTop:'25px',padding: '12px 30px',background: '#667eea',color: 'white',border: 'none',
                   borderRadius: '8px',fontSize: '16px',fontWeight: 'bold',
                 }} onClick={() => setEditingData(true)}>
             Edit Profile
           </button>
-          <button style={{padding: '12px 30px',background: '#dc3545',color: 'white',border: 'none',borderRadius: '8px',
+          <button style={{marginLeft:"10px",padding: '12px 30px',background: '#dc3545',color: 'white',border: 'none',borderRadius: '8px',
                   fontSize: '16px', fontWeight: 'bold'
                 }}
                 onClick={handleDeleteAccount}>
@@ -141,12 +157,12 @@ export default function Profile() {
           </div>
 
           <div>
-            <button style={{padding: '12px 30px',background: '#667eea',color: 'white',
+            <button style={{ marginTop:'20px',padding: '12px 30px',background: '#667eea',color: 'white',
                   fontSize: '16px',fontWeight: 'bold',
                 }} onClick={handleEditProfile}>
               Save Changes
             </button>
-            <button style={{padding: '12px 30px',background: '#dc3545',color: 'white',borderRadius: '8px',
+            <button style={{ marginTop:'20px',padding: '12px 30px',background: '#dc3545',color: 'white',borderRadius: '8px',
                   fontSize: '16px',fontWeight: 'bold',
                 }} onClick={() => {
               setEditingData(false)
@@ -162,6 +178,7 @@ export default function Profile() {
 
         </div>
       )}
+      </div>
     </div>
   )
 }

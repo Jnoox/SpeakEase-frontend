@@ -23,11 +23,11 @@ export default function SignUp() {
 
   return (
     <div style={{
-  position: 'absolute',
-  left: '50%',
-  transform: 'translateX(-50%)',
-  padding: '20px',
-  maxWidth: '1200px'
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  minHeight: '100vh', 
+  paddingLeft: '500px',
 }}>
     <form nSubmit={handleSubmit} style={{background: 'white',padding: '40px',borderRadius: '15px',boxShadow: '0 5px 20px rgba(0,0,0,0.1)',
         width: '100%',maxWidth: '400px'
@@ -41,7 +41,7 @@ export default function SignUp() {
       <input style={{width: '100%',padding: '12px',border: '2px solid #e0e0e0',borderRadius: '8px',fontSize: '16px',}} placeholder="Age" value={age} onChange={e => setAge(e.target.value)}/>
             <label style={{display: 'block',marginBottom: '8px',color: '#2c3e50',fontWeight: '500'}}>Password</label>
       <input  style={{width: '100%',padding: '12px',border: '2px solid #e0e0e0', borderRadius: '8px',fontSize: '16px'}}type='password' placeholder='Password' value={password} onChange={e => setPassword(e.target.value)} />
-      <button style={{width: '100%',padding: '14px',background: '#667eea', color: 'white', border: 'none',
+      <button style={{width: '100%',padding: '14px',background: '#667eea', color: 'white', marginTop: '30px',
             borderRadius: '8px',fontSize: '16px',fontWeight: 'bold',}}type='submit'>Sign Up</button>
     </form>
     </div>

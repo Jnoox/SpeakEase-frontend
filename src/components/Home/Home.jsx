@@ -4,27 +4,25 @@ import { Link } from 'react-router';
 export default function Home({ user }) {
   return (
     
-    <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
+    <div  style={{padding: '20px',maxWidth: '1200px',margin: '0 auto',}}>
       
       {/* Section 1: Welcome Section */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center',marginBottom: '50px',gap: '40px',flexWrap: 'wrap'}}>
-        <div style={{ flex: '1', minWidth: '300px' }}>
+      <div style={{ marginBottom: '50px', textAlign: 'left' }}>
           <h1 style={{ fontSize: '48px', marginBottom: '10px', color: '#2c3e50' }}>
             Welcome to SpeakEase! 🎤
           </h1>
           <p style={{ fontSize: '18px', color: '#7f8c8d', fontStyle: 'italic' }}>
             Your journey to confident and fluent speaking starts here
           </p>
-        </div>
         
       </div>
 
       {/* Section 2: What is SpeakEase */}
-      <div style={{ marginBottom: '50px', padding: '40px', background: '#f8f9fa', borderRadius: '15px' }}>
-        <h2 style={{ fontSize: '36px', marginBottom: '20px', color: '#2c3e50', textAlign: 'center' }}>
+      <div style={{ marginBottom: '50px', padding: '40px', background: '#f8f9fa', borderRadius: '15px', textAlign: 'left' }}>
+        <h2 style={{ fontSize: '36px', marginBottom: '20px', color: '#2c3e50', textAlign: 'left' }}>
           What is SpeakEase? 🤔
         </h2>
-        <p style={{ fontSize: '18px', lineHeight: '1.8', color: '#34495e', textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
+        <p style={{ fontSize: '18px', lineHeight: '1.8', color: '#34495e', textAlign: 'left', maxWidth: '800px', margin: '0 auto' }}>
           SpeakEase is an innovative AI-powered platform designed to help individuals improve their speaking fluency and communication skills. 
           Using advanced voice analysis and personalized feedback, we help you overcome speaking challenges, boost your confidence, 
           and express yourself more clearly. Whether you're preparing for a presentation, improving your pronunciation, 
@@ -33,7 +31,14 @@ export default function Home({ user }) {
       </div>
 
       {/* Section 3: SpeakEase Benefits */}
-      <div style={{ marginBottom: '50px' }}>
+      <div style={{
+  display: 'flex',
+  justifyContent: 'center', 
+  gap: '40px',
+  flexWrap: 'wrap',
+  alignItems: 'center',
+   marginBottom: '60px'
+}}>
         <h2 style={{ fontSize: '36px', marginBottom: '40px', color: '#2c3e50', textAlign: 'center' }}>
           SpeakEase Benefits ✨
         </h2>
@@ -103,7 +108,7 @@ export default function Home({ user }) {
 
         <div style={{ textAlign: 'center', marginTop: '40px' }}>
           <Link to="/training" style={{ textDecoration: 'none' }}>
-            <button style={{ padding: '18px 50px',fontSize: '20px',fontWeight: 'bold',background: 'yellow',
+            <button style={{ padding: '18px 50px',fontSize: '20px',fontWeight: 'bold',background: '#667eea',
               color: 'white',border: 'none',borderRadius: '50px',
             }}
             

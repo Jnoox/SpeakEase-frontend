@@ -26,12 +26,11 @@ export default function Dashboard() {
 
   return (
     
-     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
     <div  style={{ maxWidth: '600px', width: '100%', padding: '20px'  }}>
-       <h1>Dashboard</h1>
+       <h1 style={{ fontSize: '48px', marginBottom: '10px', color: '#2c3e50', textAlign:'center' }}>Dashboard</h1>
       {analytics ? (
         <div>
-          <h2>Your Progress Analytics</h2>
+          <h2 style={{textAlign:'center' }}>Your Progress Analytics</h2>
           
           <div style={{ border: '2px solid #667eea', borderRadius: '15px',padding: '30px',
             marginTop: '20px',background: 'white',boxShadow: '0 5px 20px rgba(0,0,0,0.1)'
@@ -82,6 +81,5 @@ export default function Dashboard() {
         Refresh Data
       </button> 
     </div>
-     </div>
   )
 }

@@ -28,11 +28,10 @@ export default function TipTraining() {
   }
 
   return (
-        <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-     <div style={{ border: '2px solid #667eea', borderRadius: '15px',padding: '30px',
+     <div style={{  border: '2px solid #667eea', borderRadius: '15px',padding: '30px',
             marginTop: '20px',background: 'white'
           }}>
-    <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
+    <div style={{ padding: '58px', maxWidth: '600px', margin: '0 auto' }}>
       <h1 style={{ margin: '0 0 10px 0', color: '#2c3e50' }}>Tips & Tricks</h1>
        <p style={{ margin: '0 0 20px 0', color: '#7f8c8d', fontSize: '14px' }}>
         Get helpful speaking tips and motivational quotes to improve your communication skills.
@@ -54,7 +53,6 @@ export default function TipTraining() {
             fontSize: '16px',
 fontWeight: 'bold'
           }}onClick={getRandomTip}>Get Another Tip</button>
-    </div>
     </div>
     </div>
   )
