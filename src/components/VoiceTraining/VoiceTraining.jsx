@@ -204,8 +204,6 @@ export default function VoiceTraining() {
       // reset the timer
       setTimer("00:00:00");
       console.log(result)
-
-
     } catch (err) {
       console.error(err)
     }

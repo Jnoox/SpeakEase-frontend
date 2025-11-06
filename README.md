@@ -3,7 +3,7 @@
 ### SpeakEase
 
 ### 🎯 Project Description:
-SpeakEase is an interactive web platform designed to help individuals who struggle with speaking fluently and expressing themselves. The platform uses AI-powered analysis of voice and facial expressions to improve:
+SpeakEase is an interactive web platform designed to help individuals who struggle with speaking fluently and expressing themselves. The platform uses AI-powered analysis of voice:
 
 - Pronunciation accuracy
 - Speaking confidence
