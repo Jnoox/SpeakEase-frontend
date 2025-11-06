@@ -31,70 +31,54 @@ export default function Dashboard() {
         <div>
           <h2>Your Progress Analytics</h2>
           
-           <div style={{ 
-            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '20px',
-            marginTop: '20px'
+          <div style={{ border: '2px solid #667eea', borderRadius: '15px',padding: '30px',
+            marginTop: '20px',background: 'white',boxShadow: '0 5px 20px rgba(0,0,0,0.1)'
           }}>
+            {/* source helper: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-template */}
+            {/* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-template-columns */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',gap: '20px',marginBottom: '20px'}}>
+              <div style={{ padding: '20px', borderRadius: '8px',textAlign: 'center',background: '#f8f9fa'}}>
+                <h3 style={{ margin: '0 0 10px 0', fontSize: '16px', color: '#667eea' }}>Average Score</h3>
+                <p style={{ margin: '0', fontSize: '32px', fontWeight: 'bold', color: '#2c3e50' }}>{analytics.average_score.toFixed(1)}%</p>
+              </div>
 
-          <div style={{ 
-              border: '1px solid #ddd', 
-              padding: '20px', 
-              borderRadius: '8px',
-              textAlign: 'center'
-            }}>
-            <h3>Total Sessions</h3>
-            <p>{analytics.total_sessions}</p>
-          </div>
+              <div style={{ padding: '20px', borderRadius: '8px',textAlign: 'center',background: '#f8f9fa'}}>
+                <h3 style={{ margin: '0 0 10px 0', fontSize: '16px', color: '#28a745' }}>Best Score</h3>
+                <p style={{ margin: '0', fontSize: '32px', fontWeight: 'bold', color: '#2c3e50' }}>{analytics.best_score.toFixed(1)}%</p>
+              </div>
 
-          <div style={{ 
-              border: '1px solid #ddd', 
-              padding: '20px', 
-              borderRadius: '8px',
-              textAlign: 'center'
-            }}>
-            <h3>Total Training Time</h3>
-            <p>{analytics.total_training_time}</p>
-          </div>
+              <div style={{ padding: '20px', borderRadius: '8px',textAlign: 'center',background: '#f8f9fa' }}>
+                <h3 style={{ margin: '0 0 10px 0', fontSize: '16px', color: '#dc3545' }}>Worst Score</h3>
+                <p style={{ margin: '0', fontSize: '32px', fontWeight: 'bold', color: '#2c3e50' }}>{analytics.worst_score.toFixed(1)}%</p>
+              </div>
+            </div>
 
-          {/*source helper: https://stackoverflow.com/questions/62576661/how-do-i-round-a-react-component-property-value-to-2-decimal-places */}
-          <div style={{ 
-              border: '1px solid #ddd', 
-              padding: '20px', 
-              borderRadius: '8px',
-              textAlign: 'center'
-            }}>
-            <h3>Average Score</h3>
-            <p>{analytics.average_score.toFixed(1)}%</p>
-          </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)',gap: '20px'}}>
+              <div style={{ padding: '20px', borderRadius: '8px',textAlign: 'center',background: '#f8f9fa'
+              }}>
+                <h3 style={{ margin: '0 0 10px 0', fontSize: '16px', color: '#667eea' }}>Total Sessions</h3>
+                <p style={{ margin: '0', fontSize: '32px', fontWeight: 'bold', color: '#2c3e50' }}>{analytics.total_sessions}</p>
+              </div>
 
-          <div style={{ 
-              border: '1px solid #ddd', 
-              padding: '20px', 
-              borderRadius: '8px',
-              textAlign: 'center'
-            }}>
-            <h3>Best Score</h3>
-            <p>{analytics.best_score.toFixed(1)}%</p>
+              <div style={{ padding: '20px', borderRadius: '8px',textAlign: 'center',background: '#f8f9fa'}}>
+                <h3 style={{ margin: '0 0 10px 0', fontSize: '16px', color: '#667eea' }}>Total Training Time</h3>
+                <p style={{ margin: '0', fontSize: '32px', fontWeight: 'bold', color: '#2c3e50' }}>{analytics.total_training_time}</p>
+              </div>
+            </div>
           </div>
 
-          <div style={{ 
-              border: '1px solid #ddd', 
-              padding: '20px', 
-              borderRadius: '8px',
-              textAlign: 'center'
-            }}>
-            <h3>Worst Score</h3>
-            <p>{analytics.worst_score.toFixed(1)}%</p>
-          </div>
-          </div>
-          <p style={{ marginTop: '30px', textAlign: 'center', color: '#666' }}>Last Updated: {new Date(analytics.last_updated).toLocaleString()}</p>
+          <p style={{ marginTop: '15px', textAlign: 'center', color: '#999', fontSize: '14px' }}>
+            Last Updated: {new Date(analytics.last_updated).toLocaleString()}
+          </p>
         </div>
       ) : (
         <p>Loading analytics...</p>
       )}
       
-    <button style={{ display: 'block', margin: '20px auto', padding: '10px 20px' }} onClick={getProgressAnalytics}>Refresh Data</button> 
+      <button 
+        style={{ display: 'block', margin: '20px auto', padding: '12px 30px',background: '#667eea',color: 'white',borderRadius: '8px',fontSize: '16px',fontWeight: 'bold'}} onClick={getProgressAnalytics}>
+        Refresh Data
+      </button> 
     </div>
   )
 }

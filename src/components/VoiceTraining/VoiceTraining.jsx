@@ -212,28 +212,88 @@ export default function VoiceTraining() {
   }
 
   return (
+     <div style={{ border: '2px solid #667eea', borderRadius: '15px',padding: '30px',
+        marginTop: '20px',background: 'white',
+          }}>
     <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
       <h1>Describe a Word</h1>
+      <p style={{ margin: '0 0 20px 0', color: '#7f8c8d', fontSize: '14px' }}>
+        Practice describing words to improve your vocabulary and speaking fluency with AI-powered feedback.
+      </p>
       <div>
         {word ? (
-          <div>
-            <div>{word.word}</div>
+          <div style={{ background: 'white', padding: '20px', borderRadius: '10px', 
+          textAlign: 'center',marginBottom: '20px'
+        }}>
+          <h3 style={{ margin: '0 0 10px 0', fontSize: '48px', color: '#667eea' }}>{word.word}</h3>
           </div>
         ) : (
           <p>Loading words...</p>
         )}
-        <button onClick={startRecording}>Start Recording</button>
-        <button onClick={stopRecording}>Stop Recording</button>
-        <h2>{timer}</h2>
+       <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+        {/* change timer color to red when finish */}
+        <h2 style={{ fontSize: '36px', fontWeight: 'bold', color: timer === "00:00:00" ? '#dc3545' : '#2c3e50',margin: '0'
+        }}>
+          {timer}</h2>
+          </div>
+
+        <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '20px' }}>
+        <button 
+          onClick={startRecording}
+          style={{padding: '12px 30px',background: '#28a745',color: 'white',border: 'none',
+            borderRadius: '8px',fontSize: '16px',fontWeight: 'bold'}}>
+          Start Recording
+        </button>
+        
+        <button 
+          onClick={stopRecording}
+          style={{ padding: '12px 30px',background: '#dc3545',color: 'white',border: 'none',
+            borderRadius: '8px',fontSize: '16px',fontWeight: 'bold'}}>
+          Stop Recording
+        </button>
+        </div>
+
+        {recordingStatus === "done" && (
+         <div style={{ background: '#d4edda', padding: '15px',borderRadius: '8px',marginBottom: '20px',
+          textAlign: 'center',color: '#155724',fontWeight: 'bold'
+        }}>
+          Audio recorded successfully
+        </div>
+        )}
+
+        {recordingStatus === "done" && (
+        <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '20px' }}>
+          <button 
+            onClick={sendAudio}
+            style={{padding: '12px 30px',background: '#667eea',color: 'white',borderRadius: '8px',fontSize: '16px',fontWeight: 'bold'}}>
+            Send for Analysis
+          </button>
+          <button 
+            onClick={() => {
+              setRecordedUrl(""); 
+              setAudioRecord(null); 
+              setWavAudio(null); 
+              setRecordingStatus(null); 
+              setTimer("00:05:00"); 
+              setResult(null);
+            }}
+            style={{padding: '12px 30px',background: '#6c757d',color: 'white',
+             borderRadius: '8px',fontSize: '16px',fontWeight: 'bold'}}>
+            Delete Recording
+          </button>
+        </div>
+      )}
+
         {result ? (
-          <div>
-            <h3>Result:</h3>
-            <p>Score: {result.score}%</p>
-            <p>Rating: {result.analysis.rating}</p>
-            <p>Words Per Minutes/WPM: {result.analysis.wpm}</p>
-            <p>Transcript: {result.transcribed_text}</p>
+          <div style={{ background: 'white', padding: '25px', borderRadius: '10px',marginBottom: '20px'}}>
+            <h3 style={{ margin: '0 0 20px 0', color: '#667eea', fontSize: '24px' }}>Result:</h3>
+            <p style={{ fontSize: '24px', fontWeight: 'bold', color: result.score >= 70 ? '#28a745' : result.score >= 50 ? '#ffc107' : '#dc3545',marginLeft: '10px'
+            }}>Score: {result.score}%</p>
+            <p style={{ marginBottom: '10px', color: '#2c3e50' }}>Rating: {result.analysis.rating}</p>
+            <p style={{ marginBottom: '10px', color: '#2c3e50' }}>Words Per Minutes/WPM: {result.analysis.wpm}</p>
+            <p style={{ marginBottom: '10px', color: '#2c3e50' }}>Transcript: {result.transcribed_text}</p>
             {/* source helper: https://javascript.info/keys-values-entries */}
-            <p>
+            <p style={{ marginBottom: '10px', color: '#2c3e50' }}>
               Repeated Words:{" "}
               {Object.keys(result.analysis.repeated_words).length > 0
                 ? Object.entries(result.analysis.repeated_words).map(([word, count]) => (
@@ -241,7 +301,7 @@ export default function VoiceTraining() {
                 ))
                 : "None"}
             </p>
-            <p>Mispronounced Words:
+            <p style={{ marginBottom: '10px', color: '#2c3e50' }}>Mispronounced Words:
               {result.analysis.mispronounced_words.length > 0 ? (
                 <span>{result.analysis.mispronounced_words.join(", ")}</span>
 
@@ -249,29 +309,22 @@ export default function VoiceTraining() {
                 <p>None</p>
               )}
             </p>
-            <p>Pauses: {result.analysis.pauses_percentage}%</p>
-            <p>FeedBack: {result.feedback_text}</p>
+            <p style={{ marginBottom: '10px', color: '#2c3e50' }}>Pauses: {result.analysis.pauses_percentage}%</p>
+            {/* source helper: https://codelucky.com/css-border-left/#google_vignette */}
+            <p style={{ marginTop: '15px', padding: '15px', background: '#f8f9fa', borderRadius: '8px',borderLeft: '4px solid #667eea'
+          }}>FeedBack: {result.feedback_text}</p>
           </div>
         ) : (
           <p></p>
         )}
 
-        {recordingStatus === "done" && (
-          <p>The audio recorded successfully</p>
-        )}
-
-        {recordingStatus === "done" && (
-          <div>
-            <button onClick={sendAudio}>Send</button>
-
-            <button onClick={() => {
-              setRecordedUrl(""); setAudioRecord(null); setWavAudio(null); setRecordingStatus(null); setTimer("00:05:00"); setResult(null);
-            }}> Delete </button>
+        <div style={{ textAlign: 'center' }}>
+        <button style={{padding: '12px 30px',background: '#667eea',color: 'white',borderRadius: '8px',
+            fontSize: '16px',fontWeight: 'bold'
+          }}onClick={() => { stopRecording(); clearTimer(); setRecordingStatus(null); setRecordedUrl(""); setAudioRecord(null); setWavAudio(null); setResult(null); getRandomWord();}}> Describe another word </button>
           </div>
-        )}
-
-        <button onClick={() => { stopRecording(); clearTimer(); setRecordingStatus(null); setRecordedUrl(""); setAudioRecord(null); setWavAudio(null); setResult(null); getRandomWord();}}> Describe another word </button>
       </div>
+    </div>
     </div>
   )
 }

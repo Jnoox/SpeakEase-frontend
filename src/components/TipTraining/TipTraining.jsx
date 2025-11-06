@@ -28,19 +28,31 @@ export default function TipTraining() {
   }
 
   return (
+     <div style={{ border: '2px solid #667eea', borderRadius: '15px',padding: '30px',
+            marginTop: '20px',background: 'white'
+          }}>
     <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
-      <h1>Tips & Motivation</h1>
+      <h1 style={{ margin: '0 0 10px 0', color: '#2c3e50' }}>Tips & Tricks</h1>
+       <p style={{ margin: '0 0 20px 0', color: '#7f8c8d', fontSize: '14px' }}>
+        Get helpful speaking tips and motivational quotes to improve your communication skills.
+      </p>
       { tip ?(
-      <div>
-        <div>{tip.category}</div>
-        <h2>{tip.title}</h2>
-        <p>{tip.content}</p>
-        <p>— {tip.author}</p>
+      <div  >
+        <div >{tip.category}</div>
+        <h2 style={{ margin: '0 0 15px 0', color: '#2c3e50',fontSize: '22px'
+            }}>{tip.title}</h2>
+        <p style={{ margin: '0 0 15px 0', color: '#34495e',fontSize: '16px', lineHeight: '1.8'
+            }}>{tip.content}</p>
+        <p style={{ margin: '0',color: '#7f8c8d',fontSize: '14px',fontStyle: 'italic',textAlign: 'right'
+            }}>— {tip.author}</p>
       </div>
       ) :(
-        <p>Loading tips...</p>
+        <p style={{ textAlign: 'center' }}>Loading tips...</p>
       )}
-      <button onClick={getRandomTip}>Get Another Tip</button>
+      <button style={{padding: '12px 30px',background: '#667eea',color: 'white',borderRadius: '8px',
+            fontSize: '16px',fontWeight: 'bold'
+          }}onClick={getRandomTip}>Get Another Tip</button>
+    </div>
     </div>
   )
 }

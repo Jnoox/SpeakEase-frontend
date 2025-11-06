@@ -87,17 +87,21 @@ export default function Profile() {
 
   return (
     <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
-      <h1>My Profile</h1>
-      <h2>Account Information</h2>
+      <h1 style={{ textAlign: 'center', marginBottom: '30px', color: '#2c3e50',fontSize: '36px'
+      }}>My Profile</h1>
+      <h2 style={{ margin: '0 0 30px 0', color: '#667eea',fontSize: '24px',
+      borderBottom: '2px solid #667eea',paddingBottom: '10px'
+        }}>Account Information</h2>
       {userData && profileData && !EditingData ? (
-        <div>
-          <div>Username: {userData.username} </div>
+        <div style={{ display: 'grid',gap: '20px'
+            }}>
+          <div >Username: {userData.username} </div>
           <div>Email: {userData.email}</div>
           {/* <div>First Name: {userData.first_name}</div>
         <div>Last Name: {userData.last_name}</div>  */}
           <div>Full Name: {profileData.full_name}</div>
           <div>Age: {profileData.age}</div>
-          <div>Total Training Time: {profileData.total_training_time} seconds</div>
+          <div >Total Training Time: {profileData.total_training_time} seconds</div>
         </div>
       ) : (
         // <p>Loading profile...</p>
@@ -107,10 +111,15 @@ export default function Profile() {
 
       {EditingData === false && (
         <div>
-          <button onClick={() => setEditingData(true)}>
+          <button style={{padding: '12px 30px',background: '#667eea',color: 'white',border: 'none',
+                  borderRadius: '8px',fontSize: '16px',fontWeight: 'bold',
+                }} onClick={() => setEditingData(true)}>
             Edit Profile
           </button>
-          <button onClick={handleDeleteAccount}>
+          <button style={{padding: '12px 30px',background: '#dc3545',color: 'white',border: 'none',borderRadius: '8px',
+                  fontSize: '16px', fontWeight: 'bold'
+                }}
+                onClick={handleDeleteAccount}>
             Delete Account
           </button>
         </div>
@@ -120,20 +129,26 @@ export default function Profile() {
       {EditingData && (
         <div>
           <div>
-            <label>Full Name:</label>
+            <label style={{ color: '#667eea',minWidth: '180px',fontSize: '16px'
+                }}>Full Name:</label>
             <input type="text" name="full_name" value={formData.full_name} onChange={handleChange} />
           </div>
 
           <div>
-            <label>Age:</label>
+            <label style={{ color: '#667eea',minWidth: '180px',fontSize: '16px'
+                }}>Age:</label>
             <input type="number" name="age" value={formData.age} onChange={handleChange} min="1" max="120" />
           </div>
 
           <div>
-            <button onClick={handleEditProfile}>
+            <button style={{padding: '12px 30px',background: '#667eea',color: 'white',
+                  fontSize: '16px',fontWeight: 'bold',
+                }} onClick={handleEditProfile}>
               Save Changes
             </button>
-            <button onClick={() => {
+            <button style={{padding: '12px 30px',background: '#dc3545',color: 'white',borderRadius: '8px',
+                  fontSize: '16px',fontWeight: 'bold',
+                }} onClick={() => {
               setEditingData(false)
               // set user inputs
               setFormData({
