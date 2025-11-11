@@ -1,9 +1,9 @@
-# SpeakEase Backend
+# SpeakEase Frontend
 ## 💡 Project Name:
 ### SpeakEase
 
 ### 🎯 Project Description:
-SpeakEase Backend is a Django REST Framework API that powers an AI-driven platform designed to help individuals improve their speaking fluency and communication skills. The backend handles user authentication, voice analysis, training session management, and progress tracking.
+SpeakEase Frontend is a React-based application that powers an AI-driven platform designed to help individuals improve their speaking fluency and communication skills. The frontend handles user authentication, voice recording and processing, interactive training exercises, real-time AI feedback, progress visualization, and profile management.
 
 ## Tech Stack
 
